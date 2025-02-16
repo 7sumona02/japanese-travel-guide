@@ -1,20 +1,28 @@
-import { useEffect } from 'react';
-import maplibregl from 'maplibre-gl';
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 
-const MAP_STYLE = 'https://maps.geoapify.com/v1/styles/klokantech-basic/style.json';
-const API_KEY = process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY;
+const mapContainerStyle = {
+  width: '100%',
+  height: '400px',
+};
+
+const center = {
+  lat: 35.6895, // Tokyo coordinates
+  lng: 139.6917,
+};
 
 export default function Map() {
-  useEffect(() => {
-    const map = new maplibregl.Map({
-      container: 'map',
-      style: MAP_STYLE,
-      center: [138.2529, 36.2048], // Japan coordinates
-      zoom: 6,
-    });
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY, // Add your API key in .env
+  });
 
-    map.addControl(new maplibregl.NavigationControl());
-  }, []);
+  if (loadError) return <div>Error loading maps</div>;
+  if (!isLoaded) return <div>Loading Maps...</div>;
 
-  return <div id="map" className="w-full h-96 rounded-lg shadow-lg"></div>;
+  return (
+    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={6} center={center}>
+      <Marker position={{ lat: 35.6895, lng: 139.6917 }} />
+      <Marker position={{ lat: 34.6937, lng: 135.5023 }} /> {/* Osaka */}
+      <Marker position={{ lat: 35.0116, lng: 135.7681 }} /> {/* Kyoto */}
+    </GoogleMap>
+  );
 }

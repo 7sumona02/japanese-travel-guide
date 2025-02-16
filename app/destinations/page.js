@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DestinationCard from '@/components/DestinationCard'
 import { motion } from 'motion/react'
+import Map from '@/components/Map'
 
 export default function Destinations() {
   const [destinations, setDestinations] = useState([]);
@@ -102,6 +103,11 @@ export default function Destinations() {
           </div>
         )}
       </motion.main>
+
+      <div className="my-8">
+        <h2 className="text-2xl font-bold mb-4">Explore Japan on the Map</h2>
+        <Map />
+      </div>
 
       <Footer />
     </div>

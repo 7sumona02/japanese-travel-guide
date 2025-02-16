@@ -1,5 +1,6 @@
+'use client'
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function Header() {
   return (
@@ -20,6 +21,18 @@ export default function Header() {
             </li>
             <li>
               <Link href="/itinerary" className="hover:underline">Itinerary
+              </Link>
+            </li>
+            <li>
+              <Link href="/cultural/tips" className="hover:underline">Cultural Tips
+              </Link>
+            </li>
+            <li>
+              <Link href="/cultural/etiquette" className="hover:underline">Etiquette
+              </Link>
+            </li>
+            <li>
+              <Link href="/cultural/phrasebook" className="hover:underline">Phrasebook
               </Link>
             </li>
           </ul>
